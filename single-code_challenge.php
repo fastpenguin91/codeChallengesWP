@@ -17,12 +17,13 @@ global $wpdb;
  <script  type='text/javascript'>
 
  jQuery(document).ready(function(){
-    jQuery('#random').click(function() { alert("heyyyyyyy"); //start function when Random button is clicked
+    jQuery('#random').click(function() { //start function when Random button is clicked
             jQuery.ajax({
-                type: "post",url: "admin-ajax.php",data: { action: 'randomcol', _ajax_nonce: '<?php echo $nonce; ?>' },
-                beforeSend: function() {jQuery("#loading").fadeIn('fast');}, //fadeIn loading just when link is clicked
+                type: "post",url: "",data: { action: 'randomcol', _ajax_nonce: '<?php echo $nonce; ?>' },
+                beforeSend: function() { alert("before sending")}, //fadeIn loading just when link is clicked
                 success: function(html){ //so, if data is retrieved, store it in html
-                    jQuery("#loading").fadeOut('slow');
+                    alert("success?");
+                    jQuery("#solveChallenge").fadeOut('slow');
                     jQuery("#colour").val(html); //fadeIn the html inside helloworld div
                     jQuery("#helloworld").fadeIn("fast"); //animation
                 }
@@ -32,7 +33,6 @@ global $wpdb;
  })
 
  </script>
-
 
 
 <div id="primary" class="content-area">
@@ -83,6 +83,16 @@ global $wpdb;
                 } else {
                     ?>
 
+                    <p>Hello from in the codeChallenges plugin</p>
+                    <form id="theForm">
+                    <input id="name" name="name" value = "name" type="text" />
+                    <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
+                    <input id="submit_button" value = "Click This" type="button" onClick="submit_me();" />
+                    </form>
+                    <div id="response_area">
+                    This is where we\'ll get the response
+                    </div>
+
                     <form action='' method='POST' id='helloworld4form'>
                     <p><input type='submit' name='action' id='random' value='Random' /> <input type='submit' name='action' id='save' value='Save' /></p>
                     </form>
@@ -95,7 +105,7 @@ global $wpdb;
 
                     <br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightgreen; border-radius: 10px;" id="solveChallenge">Solved!</span>
 
-                    <br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;" id="solveChallenge">UnSolve?</span> <?php
+                    <br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;" id="solveChallenge2">UnSolve?</span> <?php
                 }
 
             // End of the loop.
