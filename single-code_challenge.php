@@ -65,7 +65,17 @@ global $wpdb;
 
 
                     
-
+                    <p>Hello from in the codeChallenges plugin</p>
+                    <form id="theForm">
+                    <input id="name" name="name" value = "name" type="text" />
+                    <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
+                    <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
+                    <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
+                    <input id="submit_button" value = "Click This" type="button" onClick="submit_me();" />
+                    </form>
+                    <div id="response_area">
+                    This is where we\'ll get the response
+                    </div>
 
 
 
@@ -86,16 +96,14 @@ global $wpdb;
                     <p>Hello from in the codeChallenges plugin</p>
                     <form id="theForm">
                     <input id="name" name="name" value = "name" type="text" />
+                    <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
+                    <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
                     <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
                     <input id="submit_button" value = "Click This" type="button" onClick="submit_me();" />
                     </form>
                     <div id="response_area">
                     This is where we\'ll get the response
                     </div>
-
-                    <form action='' method='POST' id='helloworld4form'>
-                    <p><input type='submit' name='action' id='random' value='Random' /> <input type='submit' name='action' id='save' value='Save' /></p>
-                    </form>
 
                     <!--<form action="" method="POST" id="">
                         <input type="hidden" name="action" value="solve_challenge">
