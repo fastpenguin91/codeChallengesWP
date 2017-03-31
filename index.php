@@ -47,9 +47,7 @@ add_filter( 'template_include', 'portfolio_page_template', 99 );
 apply_filters( 'template_include', $template );
 function portfolio_page_template( $template ) {
   if ( is_page( 'code-challenges' )  ) {
-    //die('dead inside portfolio_page_template');
     $new_template = dirname( __FILE__ ) . '/archive-challenge.php';
-    //die($new_template);
     if ( '' != $new_template ) {
       return $new_template ;
     }
@@ -81,30 +79,6 @@ function jsc_solve_challenge(){
 }
 add_action( 'admin_post_solve_challenge', 'jsc_solve_challenge' );
 
-//global $jsc_challenge_user_db_version;
-//$jsc_challenge_user_db_version = '1.0';
-
-/*function jsc_pivot_table_install () {
-  global $wpdb;
-  global $jsc_challenge_user_db_version;
-
-  $table_name = $wpdb->prefix . "jsc_challenge_user";
-
-  $charset_collate = $wpdb->get_charset_collate();
-
-  $sql = "CREATE TABLE $table_name (
-    id tinytext NOT NULL,
-    challenge_id mediumint(9) NOT NULL,
-    user_id mediumint(9) NOT NULL,
-  ) $charset_collate;";
-
-  require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
-  dbDelta( $sql );
-
-  add_option( 'jsc_challenge_user_db_version', $jsc_challenge_user_db_version );
-
-}*/
-
 global $jal_db_version;
 $jal_db_version = '1.0';
 
@@ -134,8 +108,6 @@ function jal_install() {
 function jal_install_data() {
   global $wpdb;
   
-  $welcome_name = 'Mr. WordPress';
-  $welcome_text = 'Congratulations, you just completed the installation!';
   $welcome_challenge_id = 4;
   $welcome_user_id      = 2;
   
@@ -153,22 +125,4 @@ function jal_install_data() {
 
 
 
-/*function jsc_pivot_install_data() {
-  global $wpdb;
-
-  $welcome_user = 2;
-  $welcome_challenge = 3;
-  $welcome_id   = '3_2';
-
-  $table_name = $wpdb->prefix . 'jsc_challenge_user';
-
-  $wpdb->insert(
-    $table_name,
-    array(
-      'id' => $welcome_id,
-      'challenge_id' => $welcome_challenge,
-      'user_id' => $welcome_user,
-      )
-    );
-}*/
 ?>

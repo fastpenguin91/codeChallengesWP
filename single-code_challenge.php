@@ -17,15 +17,18 @@ global $wpdb;
  <script  type='text/javascript'>
 
  jQuery(document).ready(function(){
-    jQuery('#random').click(function() { alert('random clicked!'); //start function when Random button is clicked
-        /*jQuery.ajax({
-            type: "post",url: "admin-ajax.php",data: { action: 'solve_challenge', _ajax_nonce: '<?php echo $nonce; ?>' },
-            beforeSend: function() {jQuery("#loading").fadeIn('fast');}, //fadeIn loading just when link is clicked
-            success: function(html){ //so, if data is retrieved, store it in html
-        *///    }
-        }); //close jQuery.ajax
-        return false;
-    })
+    jQuery('#random').click(function() { alert("heyyyyyyy"); //start function when Random button is clicked
+            jQuery.ajax({
+                type: "post",url: "admin-ajax.php",data: { action: 'randomcol', _ajax_nonce: '<?php echo $nonce; ?>' },
+                beforeSend: function() {jQuery("#loading").fadeIn('fast');}, //fadeIn loading just when link is clicked
+                success: function(html){ //so, if data is retrieved, store it in html
+                    jQuery("#loading").fadeOut('slow');
+                    jQuery("#colour").val(html); //fadeIn the html inside helloworld div
+                    jQuery("#helloworld").fadeIn("fast"); //animation
+                }
+            }); //close jQuery.ajax
+            return false;
+        })
  })
 
  </script>
@@ -68,22 +71,26 @@ global $wpdb;
 
 
 
-                    <form action="<?php echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
+                    <!--<form action="<?php //echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
                         <input type="hidden" name="action" value="solve_challenge">
-                        <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
-                        <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
+                        <input type="hidden" name="user_id" value="<?php //echo $user->ID;?>">
+                        <input type="hidden" name="challenge_id" value="<?php //echo $challenge_id; ?>">
                         <button style="display: inline-block; margin: 20px; padding: 20px; border-radius: 10px;" id="solveChallenge">Mark as Solved!</button>
-                    </form>
+                    </form>-->
 
                     <!--<br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightgray; border-radius: 10px;" id="solveChallenge">Mark as Solved!</span>-->
                     <?php
                 } else {
                     ?>
 
-                    <form action="" method="POST" id="">
-                        <!--<input type="hidden" name="action" value="solve_challenge">-->
-                        <input type='submit' name='action' id='random' value='Random' />
+                    <form action='' method='POST' id='helloworld4form'>
+                    <p><input type='submit' name='action' id='random' value='Random' /> <input type='submit' name='action' id='save' value='Save' /></p>
                     </form>
+
+                    <!--<form action="" method="POST" id="">
+                        <input type="hidden" name="action" value="solve_challenge">
+                        <input type='submit' name='action' id='random' value='Random' />
+                    </form>-->
 
 
                     <br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightgreen; border-radius: 10px;" id="solveChallenge">Solved!</span>
