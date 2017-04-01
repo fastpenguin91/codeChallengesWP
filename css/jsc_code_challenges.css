@@ -1,0 +1,14 @@
+#submit_button {
+    display: inline-block;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.challengeIsSolved {
+    display: inline-block;
+    margin: 20px;
+    padding: 20px;
+    background: lightgreen;
+    border-radius: 10px;
+}

@@ -17,6 +17,19 @@ Author URI:
 register_activation_hook( __FILE__, 'jal_install' );
 register_activation_hook( __FILE__, 'jal_install_data' );
 
+
+function jsc_plugin_css() {
+  //die(var_dump( plugins_url() . '/codeChallenges/css/jsc_code_challenges.css' ) );
+  wp_register_style('jsc_code_challenges', plugins_url() . '/codeChallenges/css/jsc_code_challenges.css' );
+  wp_enqueue_style( 'jsc_code_challenges',
+    dirname(__FILE__) . '/css/jsc_code_challenges.css',
+    '',
+    false
+    );
+}
+
+add_action( 'wp_enqueue_scripts', 'jsc_plugin_css');
+
 add_action( 'init', 'create_post_type' );
 function create_post_type() {
   register_post_type( 'code_challenge',

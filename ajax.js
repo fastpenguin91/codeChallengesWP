@@ -1,5 +1,5 @@
 function submit_me(user_id, challenge_id){
-    var formStr = "<span id='challengeIsSolved' style='display: inline-block; margin: 20px; padding: 20px; background: lightgreen; border-radius: 10px;' id='solveChallenge'>Challenge is Solved!</span>";
+    var formStr = "<span class='challengeIsSolved' id='solveChallenge'>Challenge is Solved!</span>";
     formStr += " <form style='display:inline-block;' id='theForm'>";
     formStr += "<input type='hidden' name='user_id' value='" + user_id + "'>";
     formStr += "<input type='hidden' name='challenge_id' value='" + challenge_id + "'>";

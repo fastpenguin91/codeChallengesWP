@@ -44,12 +44,12 @@ global $wpdb;
 
 
                     <div id="formArea">
-                    <form id="theForm">
-                    <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
-                    <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
-                    <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-                    <input style="display: inline-block; margin: 20px; padding: 20px; border-radius: 10px;" id="submit_button" value = "Solve Challenge" type="button" onClick="submit_me(<?php echo $user->ID;?>, <?php echo $challenge_id;?>);" />
-                    </form>
+                        <form id="theForm">
+                            <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
+                            <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
+                            <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
+                            <input id="submit_button" value="Solve Challenge" type="button" onClick="submit_me(<?php echo $user->ID;?>, <?php echo $challenge_id;?>);" />
+                        </form>
                     </div>
 
 
@@ -58,13 +58,13 @@ global $wpdb;
                 } else {
                     ?>
                     <div id="formArea">
-                    <br><span id="challengeIsSolved" style="display: inline-block; margin: 20px; padding: 20px; background: lightgreen; border-radius: 10px;" id="solveChallenge">Challenge is Solved!</span>
-                    <form style="display:inline-block;" id="theForm">
-                    <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
-                    <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
-                    <input name="action" type="hidden" value="reset_challenge" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-                    <input style="display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;" id="submit_button" value = "Reset?" type="button" onClick="resetChallenge(<?php echo $user->ID;?>, <?php echo $challenge_id;?>);" />
-                    </form>
+                        <br><span class="challengeIsSolved" id="solveChallenge">Challenge is Solved!</span>
+                        <form style="display:inline-block;" id="theForm">
+                            <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
+                            <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
+                            <input name="action" type="hidden" value="reset_challenge" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
+                            <input style="display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;" id="submit_button" value = "Reset?" type="button" onClick="resetChallenge(<?php echo $user->ID;?>, <?php echo $challenge_id;?>);" />
+                        </form>
                     </div>
 
                     <?php
