@@ -14,27 +14,6 @@ global $wpdb;
 
  ?>
 
- <script  type='text/javascript'>
-
- jQuery(document).ready(function(){
-    jQuery('#random').click(function() { //start function when Random button is clicked
-            jQuery.ajax({
-                type: "post",url: "",data: { action: 'randomcol', _ajax_nonce: '<?php echo $nonce; ?>' },
-                beforeSend: function() { alert("before sending")}, //fadeIn loading just when link is clicked
-                success: function(html){ //so, if data is retrieved, store it in html
-                    alert("success?");
-                    jQuery("#solveChallenge").fadeOut('slow');
-                    jQuery("#colour").val(html); //fadeIn the html inside helloworld div
-                    jQuery("#helloworld").fadeIn("fast"); //animation
-                }
-            }); //close jQuery.ajax
-            return false;
-        })
- })
-
- </script>
-
-
 <div id="primary" class="content-area">
     <main id="main" class="site-main" role="main">
         <?php
@@ -64,56 +43,31 @@ global $wpdb;
                     <br>
 
 
-                    
-                    <p>Hello from in the codeChallenges plugin</p>
+                    <div id="formArea">
                     <form id="theForm">
-                    <input id="name" name="name" value = "name" type="text" />
                     <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
                     <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
                     <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-                    <input id="submit_button" value = "Click This" type="button" onClick="submit_me();" />
+                    <input style="display: inline-block; margin: 20px; padding: 20px; border-radius: 10px;" id="submit_button" value = "Solve Challenge" type="button" onClick="submit_me(<?php echo $user->ID;?>, <?php echo $challenge_id;?>);" />
                     </form>
-                    <div id="response_area">
-                    This is where we\'ll get the response
                     </div>
 
 
 
-
-
-                    <!--<form action="<?php //echo esc_url( admin_url('admin-post.php') ); ?>" method="post">
-                        <input type="hidden" name="action" value="solve_challenge">
-                        <input type="hidden" name="user_id" value="<?php //echo $user->ID;?>">
-                        <input type="hidden" name="challenge_id" value="<?php //echo $challenge_id; ?>">
-                        <button style="display: inline-block; margin: 20px; padding: 20px; border-radius: 10px;" id="solveChallenge">Mark as Solved!</button>
-                    </form>-->
-
-                    <!--<br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightgray; border-radius: 10px;" id="solveChallenge">Mark as Solved!</span>-->
                     <?php
                 } else {
                     ?>
-
-                    <p>Hello from in the codeChallenges plugin</p>
-                    <form id="theForm">
-                    <input id="name" name="name" value = "name" type="text" />
+                    <div id="formArea">
+                    <br><span id="challengeIsSolved" style="display: inline-block; margin: 20px; padding: 20px; background: lightgreen; border-radius: 10px;" id="solveChallenge">Challenge is Solved!</span>
+                    <form style="display:inline-block;" id="theForm">
                     <input type="hidden" name="user_id" value="<?php echo $user->ID;?>">
                     <input type="hidden" name="challenge_id" value="<?php echo $challenge_id; ?>">
-                    <input name="action" type="hidden" value="the_ajax_hook" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
-                    <input id="submit_button" value = "Click This" type="button" onClick="submit_me();" />
+                    <input name="action" type="hidden" value="reset_challenge" />&nbsp; <!-- this puts the action the_ajax_hook into the serialized form -->
+                    <input style="display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;" id="submit_button" value = "Reset?" type="button" onClick="resetChallenge(<?php echo $user->ID;?>, <?php echo $challenge_id;?>);" />
                     </form>
-                    <div id="response_area">
-                    This is where we\'ll get the response
                     </div>
 
-                    <!--<form action="" method="POST" id="">
-                        <input type="hidden" name="action" value="solve_challenge">
-                        <input type='submit' name='action' id='random' value='Random' />
-                    </form>-->
-
-
-                    <br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightgreen; border-radius: 10px;" id="solveChallenge">Solved!</span>
-
-                    <br><span style="display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;" id="solveChallenge2">UnSolve?</span> <?php
+                    <?php
                 }
 
             // End of the loop.

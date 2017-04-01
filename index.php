@@ -56,29 +56,6 @@ function portfolio_page_template( $template ) {
   return $template;
 }
 
-function jsc_solve_challenge(){
-  global $wpdb;
-
-  //die('Die from ajax!');
-
-/*
-  $user_id = (int) $_POST['user_id'];
-  $challenge_id = (int) $_POST['challenge_id'];
-
-  $wpdb->insert(
-    $wpdb->prefix . 'jsc_challenge_user',
-    array(
-      'user_id' => $user_id,
-      'challenge_id' => $challenge_id,
-      'challenge_user' => $challenge_id . '_' . $user_id
-      )
-    );
-*/
-
-
-}
-add_action( 'admin_post_solve_challenge', 'jsc_solve_challenge' );
-
 global $jal_db_version;
 $jal_db_version = '1.0';
 
@@ -128,16 +105,30 @@ function jal_install_data() {
  wp_localize_script( 'my-ajax-handle', 'the_ajax_script', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
  // THE AJAX ADD ACTIONS
  add_action( 'wp_ajax_the_ajax_hook', 'the_action_function' );
- add_action( 'wp_ajax_nopriv_the_ajax_hook', 'the_action_function' ); // need this to serve non logged in users
- // THE FUNCTION
+ add_action( 'wp_ajax_reset_challenge', 'the_reset_challenge_function');
+
+function the_reset_challenge_function(){
+  global $wpdb;
+
+  $user_id = (int) $_POST['user_id'];
+  $challenge_id = (int) $_POST['challenge_id'];
+
+  $wpdb->delete(
+    $wpdb->prefix . 'jsc_challenge_user',
+    array(
+      'user_id' => $user_id,
+      'challenge_id' => $challenge_id,
+      'challenge_user' => $challenge_id . '_' . $user_id
+      )
+    );
+  die();// wordpress may print out a spurious zero without this - can be particularly bad if using json
+}
+
  function the_action_function(){
     global $wpdb;
 
-  
     $user_id = (int) $_POST['user_id'];
     $challenge_id = (int) $_POST['challenge_id'];
-
-    //die($challenge_id);
 
     $wpdb->insert(
       $wpdb->prefix . 'jsc_challenge_user',
@@ -148,13 +139,5 @@ function jal_install_data() {
         )
       );
   
- /* this area is very simple but being serverside it affords the possibility of retreiving data from the server and passing it back to the javascript function */
- $name = $_POST['name'];
- echo"Hello World, " . $name . "your username and challenge # is: " . $user_id . " and " . $challenge_id;// this is passed back to the javascript function
  die();// wordpress may print out a spurious zero without this - can be particularly bad if using json
  }
-
-
-
-
-?>
