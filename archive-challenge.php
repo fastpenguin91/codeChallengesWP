@@ -20,18 +20,18 @@
                     </div>
      
                     <!-- Display Title and Author Name -->
-                    <strong>Challenge ID: <?php the_ID(); ?></strong><br/>
-                    <a href="<?php the_permalink(); ?>"><strong>Title: </strong><?php the_title(); ?></a><br />
-                    <?php echo esc_html( get_post_meta( get_the_ID(), 'movie_director', true ) ); ?>
-                    <br />
-                    <strong>The Permalink: <?php the_permalink(); ?></strong><br>
+                    <div class="code_challenge_list_item">
+                        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2><br />
+                        <?php echo esc_html( get_post_meta( get_the_ID(), 'movie_director', true ) ); ?>
+                        <br />
      
-                    <!-- Display yellow stars based on rating -->
-                    <strong>Difficulty Level: </strong>
-                    <?php
-                    $nb_stars = intval( get_post_meta( get_the_ID(), 'movie_rating', true ) );
+                        <!-- Display yellow stars based on rating -->
+                        <strong>Difficulty Level: <?php echo die(var_dump( the_post() ) ); ?> </strong>
+                        <?php
+                        $nb_stars = intval( get_post_meta( get_the_ID(), 'movie_rating', true ) );
                     
-                    ?>
+                        ?>
+                    </div>
                 </header>
      
                 <!-- Display movie review contents -->

@@ -4,7 +4,7 @@ function submit_me(user_id, challenge_id){
     formStr += "<input type='hidden' name='user_id' value='" + user_id + "'>";
     formStr += "<input type='hidden' name='challenge_id' value='" + challenge_id + "'>";
     formStr += "<input name='action' type='hidden' value='reset_challenge' />&nbsp;";
-    formStr += "<input style='display: inline-block; margin: 20px; padding: 20px; background: lightblue; border-radius: 10px;' id='submit_button' value = 'Reset?' type='button' onClick='resetChallenge(" + user_id + "," + challenge_id + ");' /> </form>";
+    formStr += "<input id='reset_button' value = 'Reset Challenge?' type='button' onClick='resetChallenge(" + user_id + "," + challenge_id + ");' /> </form>";
 
     jQuery.post(
         the_ajax_script.ajaxurl,
@@ -20,7 +20,7 @@ function resetChallenge(user_id, challenge_id){
     formStr += "<input type='hidden' name='user_id' value='" + user_id + "'>";
     formStr += "<input type='hidden' name='challenge_id' value='" + challenge_id + "'>";
     formStr += "<input name='action' type='hidden' value='the_ajax_hook' />&nbsp;";
-    formStr += "<input style='display: inline-block; margin: 20px; padding: 20px; border-radius: 10px;' id='submit_button' value = 'Solve Challenge' type='button' onClick='submit_me(" + user_id + "," + challenge_id + ");' /> </form>";
+    formStr += "<input id='submit_button' value = 'Solve Challenge' type='button' onClick='submit_me(" + user_id + "," + challenge_id + ");' /> </form>";
     
     jQuery.post(
         the_ajax_script.ajaxurl,

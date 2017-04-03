@@ -19,7 +19,6 @@ register_activation_hook( __FILE__, 'jal_install_data' );
 
 
 function jsc_plugin_css() {
-  //die(var_dump( plugins_url() . '/codeChallenges/css/jsc_code_challenges.css' ) );
   wp_register_style('jsc_code_challenges', plugins_url() . '/codeChallenges/css/jsc_code_challenges.css' );
   wp_enqueue_style( 'jsc_code_challenges',
     dirname(__FILE__) . '/css/jsc_code_challenges.css',
@@ -46,11 +45,9 @@ function create_post_type() {
 
 function jsc_get_custom_post_type_template($single_template) {
      global $post;
-     //die('called the get_custom_post_type_template function.');
 
      if ($post->post_type == 'code_challenge') {
           $single_template = dirname( __FILE__ ) . '/single-code_challenge.php';
-          //die($single_template);
      }
      return $single_template;
 }
@@ -82,7 +79,6 @@ function jal_install() {
 
   $sql = "CREATE TABLE $table_name (
     id mediumint(9) NOT NULL AUTO_INCREMENT,
-    challenge_user tinytext NOT NULL,
     challenge_id mediumint(9) NOT NULL,
     user_id mediumint(9) NOT NULL,
     PRIMARY KEY  (id)
@@ -123,34 +119,33 @@ function jal_install_data() {
 function the_reset_challenge_function(){
   global $wpdb;
 
-  $user_id = (int) $_POST['user_id'];
+  $user = wp_get_current_user();
   $challenge_id = (int) $_POST['challenge_id'];
 
   $wpdb->delete(
     $wpdb->prefix . 'jsc_challenge_user',
     array(
-      'user_id' => $user_id,
-      'challenge_id' => $challenge_id,
-      'challenge_user' => $challenge_id . '_' . $user_id
+      'user_id' => $user->ID,
+      'challenge_id' => $challenge_id
       )
     );
-  die();// wordpress may print out a spurious zero without this - can be particularly bad if using json
+  die();
 }
+
+
 
  function the_action_function(){
     global $wpdb;
-
-    $user_id = (int) $_POST['user_id'];
+$user = wp_get_current_user();
     $challenge_id = (int) $_POST['challenge_id'];
 
     $wpdb->insert(
       $wpdb->prefix . 'jsc_challenge_user',
       array(
-        'user_id' => $user_id,
-        'challenge_id' => $challenge_id,
-        'challenge_user' => $challenge_id . '_' . $user_id
+        'user_id' => $user->ID,
+        'challenge_id' => $challenge_id
         )
       );
   
- die();// wordpress may print out a spurious zero without this - can be particularly bad if using json
+ die();
  }
