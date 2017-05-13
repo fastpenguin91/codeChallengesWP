@@ -1,6 +1,6 @@
 <?php
     /**
-    * Template Name: Archive Challenge
+    * Template Name: Unsolved Challenges
     */
 
     get_header(); ?>
@@ -13,18 +13,29 @@
 
         $user = wp_get_current_user();
 
-        $num_of_solved_challenges = $wpdb->get_results( "SELECT COUNT(*) AS post_count FROM wp_jsc_challenge_user WHERE user_id = $user->ID");
+        $solved_id_array = $wpdb->get_results( "SELECT challenge_id FROM wp_jsc_challenge_user WHERE user_id = $user->ID");
 
-        //die(var_dump($num_of_solved_challenges[0]->post_count));
+        $solved_ids = array();
 
+        foreach($solved_id_array as $elem) {
+            array_push($solved_ids, $elem->challenge_id);
+        }
 
+        //die(var_dump($solved_ids));
 
+        
+        // This WILL work
+        //$exclude_ids = array( 1, 2, 3 );
+        //$query = new WP_Query( array( 'post__not_in' => $exclude_ids ) );
 
+        //array('post__not_in' => $solved_ids)
 
-        $mypost = array( 'post_type' => 'code_challenge', );
-        $loop = new WP_Query( $mypost );
+        $myposts = array( 'post_type' => 'code_challenge', 'post__not_in' => $solved_ids );
+        //$mypost = array( 'post_type' => 'code_challenge', );
+        //$loop = new WP_Query( $mypost );
+        $loop = new WP_Query( $myposts );
         ?>
-        <h2>You've solved <?php echo $num_of_solved_challenges[0]->post_count; ?> of <?php echo $num_of_posts->publish; ?> challenges <a href="../unsolved-challenges/">View Unsolved</a></h2>
+        <h2>You've solved <?php echo $num_of_solved_challenges; ?> of <?php echo $num_of_posts->publish; ?> challenges</h2>
         <?php while ( $loop->have_posts() ) : $loop->the_post();?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
                 <header class="entry-header">

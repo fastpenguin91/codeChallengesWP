@@ -54,10 +54,22 @@ function jsc_get_custom_post_type_template($single_template) {
 add_filter( 'single_template', 'jsc_get_custom_post_type_template' );
 
 add_filter( 'template_include', 'portfolio_page_template', 99 );
+add_filter( 'template_include', 'unsolved_challenges_template', 99);
 apply_filters( 'template_include', $template );
 function portfolio_page_template( $template ) {
   if ( is_page( 'code-challenges' )  ) {
     $new_template = dirname( __FILE__ ) . '/archive-challenge.php';
+    if ( '' != $new_template ) {
+      return $new_template ;
+    }
+  }
+
+  return $template;
+}
+
+function unsolved_challenges_template( $template ) {
+  if ( is_page( 'unsolved-challenges' )  ) {
+    $new_template = dirname( __FILE__ ) . '/unsolved-challenges.php';
     if ( '' != $new_template ) {
       return $new_template ;
     }
