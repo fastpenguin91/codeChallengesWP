@@ -1,0 +1,9 @@
+<?php
+
+die("plugin_dir_path classChallenges..adflk");
+
+class Code_Challenges_WP {
+    
+}
+
+?>

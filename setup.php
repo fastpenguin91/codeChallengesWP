@@ -13,6 +13,7 @@ add_action( 'wp_enqueue_scripts', 'jsc_plugin_css');
 add_action( 'init', 'create_post_type' );
 
 function create_post_type() {
+    //   die("create post type");
     register_post_type( 'code_challenge',
                         array(
                             'labels' => array(
