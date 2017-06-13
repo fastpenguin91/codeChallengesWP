@@ -15,9 +15,9 @@ class Code_Challenges_WP {
 
     private function define_public_hooks() {
 
-        $plugin_public = new Code_Challenges_
+  //      $plugin_public = new Code_Challenges_
 
-        $this->loader->add_action();
+  //      $this->loader->add_action();
     }
 }
 
