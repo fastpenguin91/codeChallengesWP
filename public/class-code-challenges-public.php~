@@ -1,0 +1,14 @@
+<?php
+
+class Code_Challenges_Public {
+
+    private $code_challenges;
+
+    public function enqueue_styles() {
+        
+        wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/plugin-name-public.js', array( 'jquery' ), $this->version, false );       
+    }
+
+}
+
+?>
